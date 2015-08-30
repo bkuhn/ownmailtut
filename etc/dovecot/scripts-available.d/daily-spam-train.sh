@@ -4,13 +4,13 @@ set -e
 
 for type in Ham Spam;
 do
-    typeLower=`echo $type | perl -pe '$_ = "\l$_\e";'`
+    typeLower=`echo $type | perl -pe '$_ = "\l$_\E";'`
     old=${HOME}/Mail/.Old$type
-    echo "Training Ham that you left in TrainAs$type (2 passes):  "
     for subdir in cur new; do
        folder=${HOME}/Mail/.TrainAs$type
        if [ -d $folder/$subdir ]; then
-           sa-learn --no-sync --ham $folder/$subdir
+           echo "Training $type that you left in TrainAs$type ($subdir):  "
+           sa-learn --no-sync --$typeLower $folder/$subdir
            if [ ! -d $old ]; then
                mkdir -p $old/{cur,new,tmp}
             fi
@@ -23,7 +23,6 @@ do
     done
     echo -e "\n"
 done
-
 
 sa-learn --sync
 
