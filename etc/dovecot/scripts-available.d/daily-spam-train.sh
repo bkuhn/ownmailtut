@@ -14,9 +14,10 @@ do
            if [ ! -d $old ]; then
                mkdir -p $old/{cur,new,tmp}
             fi
-            cnt=`/bin/ls -1 $folder/$subdir/| wc -l`
+            cnt=`/bin/ls -1 $folder/$subdir| wc -l`
             if [ $cnt -gt 0 ]; then
                mv -f $folder/$subdir/* $old/cur/
+               rm -f $old/dovecot*
                echo "Moved $cnt emails from TrainAs$type to the Old$type folder."
             fi
        fi
