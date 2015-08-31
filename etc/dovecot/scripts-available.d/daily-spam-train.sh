@@ -5,9 +5,9 @@ set -e
 for type in Ham Spam;
 do
     typeLower=`echo $type | perl -pe '$_ = "\l$_\E";'`
-    old=${HOME}/Mail/.Old$type
+    old=${HOME}/Mail/Old$type
     for subdir in cur new; do
-       folder=${HOME}/Mail/.TrainAs$type
+       folder=${HOME}/Mail/TrainAs$type
        if [ -d $folder/$subdir ]; then
            echo "Training $type that you left in TrainAs$type ($subdir):  "
            sa-learn --no-sync --$typeLower $folder/$subdir
