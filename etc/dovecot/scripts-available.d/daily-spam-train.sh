@@ -13,6 +13,8 @@ if [ -z "$USER" ]; then
     exit 1
 fi
 
+myindent() { sed 's/^/     /'; }
+
 didAny=0
 
 for type in Ham Spam;
@@ -27,25 +29,26 @@ do
         didAny=1
         echo "Training $cnt message(s) of $typeLower that you left in ${curFolderName}:  "
         for subdir in cur new; do
-            if [ -d $folder/$subdir ]; then
-                sa-learn --no-sync --$typeLower $curFolder/$subdir
+            if [ -d $curFolder/$subdir ]; then
+                sa-learn --no-sync --$typeLower $curFolder/$subdir | myindent
             fi
         done
-        # Next, the doveadm mailbox create command returns a
-        # non-zero $?  if the folder exists already.
-        doveadm mailbox create $finishedFolderName || true
-        # Next, the doveadm mailbox status command should exit with
-        # non-zero $?  if the mailbox doesn't exist at this point.
-        # So, that's used to test if the create worked.
+        # Next, the doveadm mailbox create command.  It returns a
+        # non-zero $?  if the folder exists already, so || true and then...
+        doveadm mailbox create $finishedFolderName > /dev/null 2>&1 || true
+        # ... do a test of the doveadm mailbox status command, which
+        # should exit with non-zero $?  if the mailbox doesn't now
+        # exist at this point.
         doveadm mailbox status  -t messages $finishedFolderName > /dev/null
-        doveadm move $finishedFolder mailbox $curFolder ALL
-        echo "Moved $cnt emails from $curFolder to the $finishedFolder folder."
+
+        doveadm move $finishedFolderName mailbox $curFolderName ALL
+        echo "Moved $cnt emails from the $curFolderName folder to the $finishedFolderName folder."|myindent
         echo -e "\n"
     fi
 done
 
 if [ $didAny -eq 1 ]; then
-    sa-learn --sync
-    echo -e "\nYour spam database has been syncronized."
-    echo "Training Complete."
+    echo -e "\nSynchronizing your spam database.... "
+    sa-learn --sync | myindent
+    echo "...and spam training for today is now complete."
 fi
