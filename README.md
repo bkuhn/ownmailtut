@@ -19,3 +19,7 @@ This tutorial is likely for you if the following criteria are true for you:
 
 * You have basic sysadmin skills and you can continue to do basic sysadmin
   tasks on the system.
+
+## What Are The Steps?
+
++ [Install necessary packages](PackageInstallation.md).
