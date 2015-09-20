@@ -1,5 +1,6 @@
 # Postfix Configuration
 
+## Authorized Outgoing SMTP
 
 ## Greylisting
 
