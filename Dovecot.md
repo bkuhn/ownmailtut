@@ -28,6 +28,26 @@ Next, add the following settings to
     ssl_cert = </etc/ssl/certs/2015-example-org.pem
     ssl_key = </etc/ssl/private/2015-example-org-private.key
 
+## Mail Storage Location
+
+Dovecot will operate as the Mail Delivery Agent (MDA) as well as the IMAP
+server.  Thus (more or less), only Dovecot needs to know where the mail
+ultimately lives with the
+[`mail_location`](http://wiki.dovecot.org/MailLocation) in
+[`/etc/dovecot/conf.d/10-mail.conf`](etc/dovecot/conf.d/10-mail.conf).  The
+following setting:
+
+    mail_location = maildir:~/Mail:INBOX=~/Mail/INBOX:LAYOUT=fs
+
+does a few things.  First, it says that each user's inbox will be in their
+home directory, in `~/Mail/INBOX` instead of the default location (in
+`/var/mail`).
+
+More importantly, `LAYOUT=fs` assures that subfolders in IMAP are also
+[subfolders on the disk](http://wiki.dovecot.org/MailboxFormat/Maildir#Directory_Structure).
+This is mostly a matter of taste.
+
+
 ## Postfix authorization
 
 Dovecot handles IMAP, but not authorized outgoing SMTP mail, which is
