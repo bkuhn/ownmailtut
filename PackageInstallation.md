@@ -9,6 +9,12 @@ following packages:
 
      # aptitude install postfix postgrey dovecot postfix-policyd-spf-python
 
+## Security Updates For Debian
+
+On a Debian-based system, add the security sources to your list if they are
+not already there.  I typically do this by creating
+[`/etc/apt/sources.list.d/security.list`](etc/apt/sources.list.d/security.list).
+
 ## SRS Support From testing
 
 At the time of writing, jessie did not have the `postsrsd` package, so you'll
