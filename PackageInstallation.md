@@ -7,7 +7,7 @@ work roughly similarly, but these instructions were only tested on jessie.
 Install the basic operating system to start, of course, and the you want the
 following packages:
 
-     # aptitude install postfix postgrey dovecot postfix-policyd-spf-python
+     # aptitude install postfix postgrey dovecot postfix-policyd-spf-python firehol
 
 ## Security Updates For Debian
 
