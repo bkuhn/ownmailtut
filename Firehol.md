@@ -74,3 +74,14 @@ consider a few of the important lines from this configuration:
 
 * Add IP numbers to `allow_outgoing_ssh_ips` to allow ssh connections
   *outgoing* from this server to another host.
+
+## Enable Firehol On Boot
+
+Two settings are changed in [etc/default/firehol](etc/default/firehol) from
+the default. `START_FIREHOL` is set to `YES` so that firehol will launch
+automatically when the system boots.  With this setting, ensure
+`WAIT_FOR_IFACE` is set to the external-network-facing interface.  In many
+situations, this is `eth0`.
+
+
+
