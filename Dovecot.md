@@ -24,6 +24,14 @@ file included by
 `auth-system.conf.ext`.  Make no changes to that file; the Debian settings
 handles the PAM authentication.
 
+## Hostname Setting
+
+Add your FQDN to
+[`/etc/dovecot/conf.d/15-lda.conf`](etc/dovecot/conf.d/15-lda.conf) as
+follows:
+
+    hostname = myown.example.org
+
 ## SSL Configuration
 
 Take the
