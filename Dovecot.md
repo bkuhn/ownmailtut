@@ -3,7 +3,7 @@
 ## SSL Configuration
 
 Take the
-[SSL certificate for the server that you previously generated](PrepWork.md#SSL-Certificate)
+[SSL certificate for the server that you previously generated](PrepWork.md#ssl-certificate)
 and place it in a file named `/etc/ssl/certs/2015-example-org.pem`.
 
 Since this is the private key, take care that not just any user can read the
@@ -23,4 +23,5 @@ Dovecot handles IMAP, but not authorized outgoing SMTP mail, which is
       mode = 0660
       user = postfix
     }
+
 
