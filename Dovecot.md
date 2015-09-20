@@ -1,5 +1,29 @@
 # Dovecot
 
+[Dovecot](http://wiki.dovecot.org/FrontPage) is an IMAP server.  This
+tutorial explains how to configure Dovecot for a small group of users with
+basic authentication and SSL support.
+
+## Basic Authentication
+
+Dovecot supports many
+[complex authentication mechanisms](http://wiki2.dovecot.org/Authentication/Mechanisms),
+this tutorial does not discuss their configuration.
+
+Thus, the only change needed for authentication is in
+[`/etc/dovecot/conf.d/10-auth.conf`](etc/dovecot/conf.d/10-auth.conf) as follows:
+
+    auth_mechanisms = plain login
+
+which allows the login authentication mechanism.
+
+By default, the Dovecot package in Debian uses PAM authentication against the
+normal system login system.  This is already enabled automatically via the
+file included by
+[`/etc/dovecot/conf.d/10-auth.conf`](etc/dovecot/conf.d/10-auth.conf), called
+`auth-system.conf.ext`.  Make no changes to that file; the Debian settings
+handles the PAM authentication.
+
 ## SSL Configuration
 
 Take the
