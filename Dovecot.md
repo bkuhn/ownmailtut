@@ -3,15 +3,30 @@
 ## SSL Configuration
 
 Take the
-[SSL certificate for the server that you previously generated](PrepWork.md#ssl-certificate)
+[SSL third-party signed certificate for the server that you previously generated](PrepWork.md#ssl-certificate)
 and place it in a file named `/etc/ssl/certs/2015-example-org.pem`.
 
-Since this is the private key, take care that not just any user can read the
-file.  One way to solve that problem, is to set  permissions to 0440 on this
-file, and put the file in a group allowed to read it:
+While this is basically public information, nothing we configure requires the
+file to be world-readable, so we set it only group-readable:
 
     # chown root.ssl-cert /etc/ssl/certs/2015-example-org.pem
     # chmod 440 /etc/ssl/certs/2015-example-org.pem
+
+You will also need to put the the private key in place as well, such as in a
+file named `/etc/ssl/private/2015-example-org-private.key`.  Definitely take
+care that not just any user can read the file, so making it only readable by
+the `ssl-cert` group is important:
+
+    # chown root.ssl-cert /etc/ssl/private/2015-example-org-private.key
+    # chmod 440 /etc/ssl/private/2015-example-org-private.key
+
+Next, add the following settings to
+[`/etc/dovecot/conf.d/10-ssl.conf`](etc/dovecot/conf.d/10-ssl.conf):
+
+    ssl = yes
+    ...
+    ssl_cert = </etc/ssl/certs/2015-example-org.pem
+    ssl_key = </etc/ssl/private/2015-example-org-private.key
 
 ## Postfix authorization
 
