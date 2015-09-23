@@ -70,7 +70,8 @@ ultimately lives with the
 following setting:
 
     mail_location = maildir:~/Mail:INBOX=~/Mail/INBOX:LAYOUT=fs
-
+    ...
+    separator = /
 does a few things.  First, it says that each user's inbox will be in their
 home directory, in `~/Mail/INBOX` instead of the default location (in
 `/var/mail`).
