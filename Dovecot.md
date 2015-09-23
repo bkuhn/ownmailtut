@@ -93,3 +93,16 @@ Dovecot handles IMAP, but not authorized outgoing SMTP mail, which is
     }
 
 
+### Sieve
+
+ Explain dovecot/conf.d/20-managesieve.conf
+
+    protocol mangesieve {
+      sieve_storage = ~/sieve
+    }
+
+Explain and how to set it up properly dovecot/sieve-available.d/01-put-spam-in-folder.sieve
+
+### Antispam plugin
+
+Explain how this works and why I don't use it.
